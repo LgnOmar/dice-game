@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="game-layout">
+            <div class="left-panel">
+                <div class="player-info top-player">
+                    <div class="player-avatar">
+                        <div class="avatar-circle black-avatar"></div>
+                    </div>
+                    <div class="player-details">
+                        <span class="player-name">Black Player</span>
+                        <span class="player-rating">(1200)</span>
+                    </div>
+                    <div class="timer-container">
+                        <div class="timer black-timer" id="black-timer">10:00</div>
+                        <div class="timer-bar"></div>
+                    </div>
+                </div>
+
+                <div class="board-wrapper">
+                    <div class="coordinates file-coords-top"></div>
+                    <div class="board-container">
+                        <div class="coordinates rank-coords-left"></div>
+                        <div id="chess-board" class="chess-board"></div>
+                        <div class="coordinates rank-coords-right"></div>
+                    </div>
+                    <div class="coordinates file-coords-bottom"></div>
+                </div>
+
+                <div class="player-info bottom-player">
+                    <div class="player-avatar">
+                        <div class="avatar-circle white-avatar"></div>
+                    </div>
+                    <div class="player-details">
+                        <span class="player-name">White Player</span>
+                        <span class="player-rating">(1200)</span>
+                    </div>
+                    <div class="timer-container">
+                        <div class="timer white-timer active" id="white-timer">10:00</div>
+                        <div class="timer-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="game-info">
+                    <div class="move-history-container">
+                        <div class="move-history-header">
+                            <span>Moves</span>
+                        </div>
+                        <div class="move-history" id="move-history"></div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="control-btn" id="new-game-btn" title="New Game">
+                        <svg viewBox="0 0 30 30" width="20" height="20">
+                            <path fill="currentColor" d="M15 3a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 4v4.5l3.5 2-1 1.5-4.5-2.5V9h2z"/>
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="flip-btn" title="Flip Board">
+                        <svg viewBox="0 0 30 30" width="20" height="20">
+                            <path fill="currentColor" d="M22.5 7.5l-4 4h3c0 4.97-4.03 9-9 9s-9-4.03-9-9h-3l4-4 4 4h-3c0 3.31 2.69 6 6 6s6-2.69 6-6h3l-4-4-4 4h3zm-15 15l4-4h-3c0-4.97 4.03-9 9-9s9 4.03 9 9h3l-4 4-4-4h3c0-3.31-2.69-6-6-6s-6 2.69-6 6h-3l4-4 4 4h-3z"/>
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="undo-btn" title="Undo Move">
+                        <svg viewBox="0 0 30 30" width="20" height="20">
+                            <path fill="currentColor" d="M12 9l-4 4 4 4V14h3c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7h-3V9zm-2 12H8c0 3.87 3.13 7 7 7h3v3l4-4-4-4v3h-3c-2.76 0-5-2.24-5-5z"/>
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="resign-btn" title="Resign">
+                        <svg viewBox="0 0 30 30" width="20" height="20">
+                            <path fill="currentColor" d="M15 3C8.37 3 3 8.37 3 15s5.37 12 12 12 12-5.37 12-12S21.63 3 15 3zm5 13.59L18.59 18 15 14.41 11.41 18 10 16.59 13.59 13 10 9.41 11.41 8 15 11.59 18.59 8 20 9.41 16.41 13 20 16.59z"/>
+                        </svg>
+                    </button>
+                    <button class="control-btn" id="draw-btn" title="Offer Draw">
+                        <svg viewBox="0 0 30 30" width="20" height="20">
+                            <path fill="currentColor" d="M15 3a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 6v4H9v2h5v4l5-5-5-5z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="captured-pieces">
+                    <div class="captured-white" id="captured-white"></div>
+                    <div class="captured-black" id="captured-black"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="promotion-modal" id="promotion-modal">
+        <div class="promotion-content">
+            <div class="promotion-options" id="promotion-options"></div>
+        </div>
+    </div>
+
+    <div class="game-over-modal" id="game-over-modal">
+        <div class="game-over-content">
+            <h2 id="game-over-title">Game Over</h2>
+            <p id="game-over-message"></p>
+            <button class="play-again-btn" id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <div class="drag-piece" id="drag-piece"></div>
+
+    <script src="chess.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
